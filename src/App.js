@@ -9,12 +9,13 @@ import RestoreIcon from '@material-ui/icons/Favorite';
 import styled from 'styled-components';
 
 const StyledBottomNavigation = styled(BottomNavigation)`
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0;
 `
 
 const Container = styled.div`
+  overflow: hidden;
   height: 100vh;
   background-color: ${Primary};
 `

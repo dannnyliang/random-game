@@ -68,7 +68,7 @@ const NameMode = styled(UnStyledNameMode)`
     flex-flow: column nowrap;
 
     > button {
-      margin: ${space.xxl} 0;
+      margin: ${space.xl} 0;
     }
   }
 `;

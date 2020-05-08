@@ -55,7 +55,7 @@ const QuestionMode = styled(UnStyledQuestionMode)`
     flex-flow: column nowrap;
 
     > button {
-      margin: ${space.xxl} 0;
+      margin: ${space.xl} 0;
     }
   }
 `;

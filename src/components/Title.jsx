@@ -34,6 +34,7 @@ const Title = styled(UnTitle)`
     color: ${PrimaryLight};
     font-style: italic;
     font-weight: 400;
+    transform: translateX(-6px);
   }
 `;
 
