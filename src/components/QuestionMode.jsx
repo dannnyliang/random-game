@@ -1,34 +1,63 @@
-import { Button, Container, Typography } from '@material-ui/core'
+import { Button, Container, Typography } from "@material-ui/core";
 
-import React from 'react'
-import questions from '../static/questions'
-import styled from 'styled-components'
-import useRandomPop from '../useRandomPop'
+import PropTypes from "prop-types";
+import React from "react";
+import Title from "./Title";
+import questions from "../static/questions";
+import { space } from "../static/space";
+import styled from "styled-components";
+import useRandomPop from "../useRandomPop";
 
-const StyledContainer = styled(Container)`
-  border: 1px solid #000;
-  display: flex;
-  align-items: center;
-`
+const propTypes = {
+  classNmae: PropTypes.string,
+  title: PropTypes.string.isRequired
+};
 
-const QuestionMode = () => {
-  const { isInit, item: question, pop } = useRandomPop(questions)
+const defaultProps = {
+  className: "",
+};
+
+const UnStyledQuestionMode = (props) => {
+  const { className, title } = props;
+  const { isInit, item: question, pop } = useRandomPop(questions);
 
   return (
-    <StyledContainer>
-      <Typography variant="h1" gutterBottom>
-        快問快答
-      </Typography>
-      {isInit ? <Button variant='outlined' onClick={() => pop()}>開始</Button> :
-        <>
-          <div>
-            題目：{question}
-          </div>
-          <Button variant='contained' color='primary' onClick={() => pop()}>下一題</Button>
-        </>
-      }
-    </StyledContainer>
-  )
-}
+    <div className={className}>
+      <Title content={title} />
+      <Container className="container" maxWidth="md">
+        {isInit ? (
+          <Button variant="outlined" onClick={() => pop()}>
+            開始
+          </Button>
+        ) : (
+          <Button variant="contained" color="secondary" onClick={() => pop()}>
+            下一題
+          </Button>
+        )}
+        {question && <Typography variant="h5">{question}</Typography>}
+      </Container>
+    </div>
+  );
+};
 
-export default QuestionMode
+UnStyledQuestionMode.propTypes = propTypes;
+UnStyledQuestionMode.defaultProps = defaultProps;
+
+const QuestionMode = styled(UnStyledQuestionMode)`
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+
+    > button {
+      margin: ${space.xxl} 0;
+    }
+  }
+`;
+
+export default styled(QuestionMode)``;

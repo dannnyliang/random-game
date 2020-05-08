@@ -1,34 +1,76 @@
-import { Button, Container, Typography } from '@material-ui/core'
+import { Button, Container, Typography } from "@material-ui/core";
 
-import React from 'react'
-import names from '../static/names'
-import styled from 'styled-components'
-import useRandomPop from '../useRandomPop'
+import PropTypes from "prop-types";
+import React from "react";
+import Title from "./Title";
+import bodyParts from "../static/bodyParts";
+import names from "../static/names";
+import { space } from "../static/space";
+import styled from "styled-components";
+import useRandomPop from "../useRandomPop";
 
-const StyledContainer = styled(Container)`
-  border: 1px solid #000;
-  display: flex;
-  align-items: center;
-`
+const propTypes = {
+  classNmae: PropTypes.string,
+  title: PropTypes.string.isRequired,
+};
 
-const NameMode = () => {
-  const { isInit, item: name, pop } = useRandomPop(names)
+const defaultProps = {
+  className: "",
+};
+
+const UnStyledNameMode = (props) => {
+  const { className, title } = props;
+  const { isInit, item: name, pop: popName } = useRandomPop(names);
+  const { item: bodyPart, pop: popBodyPart } = useRandomPop(bodyParts);
 
   return (
-    <StyledContainer>
-      <Typography variant="h1" gutterBottom>
-        我的媽媽最美麗
-      </Typography>
-      {isInit ? <Button variant='outlined' onClick={() => pop()}>開始</Button> :
-        <>
-          <div>
-            挑戰者：{name}
-          </div>
-          <Button variant='contained' color='primary' onClick={() => pop()}>下一題</Button>
-        </>
-      }
-    </StyledContainer>
-  )
-}
+    <div className={className}>
+      <Title content={title} />
+      <Container className="container" maxWidth="md">
+        {isInit ? (
+          <Button variant="outlined" onClick={() => popName()}>
+            開始
+          </Button>
+        ) : (
+          <>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => popName()}
+            >
+              下一位
+            </Button>
+            <Typography gutterBottom>挑戰者</Typography>
+            <Typography variant="h3">{name}</Typography>
+          </>
+        )}
+        <Button variant="contained" color="secondary" onClick={() => popBodyPart()}>
+          抽部位
+        </Button>
+        <Typography variant="h3">{bodyPart}</Typography>
+      </Container>
+    </div>
+  );
+};
 
-export default NameMode
+UnStyledNameMode.propTypes = propTypes;
+UnStyledNameMode.defaultProps = defaultProps;
+
+const NameMode = styled(UnStyledNameMode)`
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+
+    > button {
+      margin: ${space.xxl} 0;
+    }
+  }
+`;
+
+export default NameMode;

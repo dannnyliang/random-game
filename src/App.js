@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import NameMode from './components/NameMode';
+import { Primary } from './static/color';
 import QuestionMode from './components/QuestionMode';
 import RestoreIcon from '@material-ui/icons/Favorite';
 import styled from 'styled-components';
@@ -14,12 +15,19 @@ const StyledBottomNavigation = styled(BottomNavigation)`
 `
 
 const Container = styled.div`
-  /* height: 100vh; */
+  height: 100vh;
+  background-color: ${Primary};
 `
 
 const modeMap = {
-  NAME: NameMode,
-  QUESTION: QuestionMode
+  NAME: {
+    component: NameMode,
+    title: '我的媽媽最美麗'
+  },
+  QUESTION: {
+    component: QuestionMode,
+    title: '快問快答'
+  }
 }
 
 const MODE = {
@@ -29,19 +37,19 @@ const MODE = {
 
 function App() {
   const [mode, setMode] = useState(MODE.NAME)
-  const ModeComponent = modeMap[mode]
+  const ModeComponent = modeMap[mode].component
 
   return (
     <Container>
-      <ModeComponent />
+      <ModeComponent title={modeMap[mode].title} />
 
       <StyledBottomNavigation
         value={mode}
         onChange={(event, newValue) => setMode(newValue)}
         showLabels
       >
-        <BottomNavigationAction value={MODE.NAME} label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction value={MODE.QUESTION} label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction value={MODE.NAME} label={modeMap.NAME.title} icon={<RestoreIcon />} />
+        <BottomNavigationAction value={MODE.QUESTION} label={modeMap.QUESTION.title} icon={<LocationOnIcon />} />
       </StyledBottomNavigation>
     </Container>
   );
