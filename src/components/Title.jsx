@@ -1,4 +1,5 @@
 import { PrimaryDark, PrimaryLight } from "../static/color";
+import useDevice, { DEVICE } from "../hooks/useDevice";
 
 import PropTypes from "prop-types";
 import React from "react";
@@ -13,16 +14,20 @@ const propTypes = {
 
 const defaultProps = {
   className: "",
-  content: ""
+  content: "",
 };
 
-const UnTitle = (props) => (
-  <div className={props.className}>
-    <Typography className="content" align="center" variant="h1">
-      {props.content}
-    </Typography>
-  </div>
-);
+const UnTitle = (props) => {
+  const { device } = useDevice();
+
+  return (
+    <div className={props.className}>
+      <Typography className="content" align="center" variant={device === DEVICE.DESKTOP ? 'h1' : 'h3'}>
+        {props.content}
+      </Typography>
+    </div>
+  );
+};
 
 const Title = styled(UnTitle)`
   width: 100%;

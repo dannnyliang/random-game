@@ -15,7 +15,6 @@ const StyledBottomNavigation = styled(BottomNavigation)`
 `
 
 const Container = styled.div`
-  overflow: hidden;
   height: 100vh;
   background-color: ${Primary};
 `

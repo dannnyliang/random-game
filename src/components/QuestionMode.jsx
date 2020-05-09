@@ -6,7 +6,7 @@ import Title from "./Title";
 import questions from "../static/questions";
 import { space } from "../static/space";
 import styled from "styled-components";
-import useRandomPop from "../useRandomPop";
+import useRandomPop from "../hooks/useRandomPop";
 
 const propTypes = {
   classNmae: PropTypes.string,

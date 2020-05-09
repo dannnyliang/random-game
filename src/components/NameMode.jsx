@@ -7,7 +7,7 @@ import bodyParts from "../static/bodyParts";
 import names from "../static/names";
 import { space } from "../static/space";
 import styled from "styled-components";
-import useRandomPop from "../useRandomPop";
+import useRandomPop from "../hooks/useRandomPop";
 
 const propTypes = {
   classNmae: PropTypes.string,
